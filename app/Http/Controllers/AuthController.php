@@ -97,7 +97,7 @@ class AuthController extends Controller
 
     public function showAdminLoginForm()
     {
-        return view('auth.admin_login');
+        return view('auth.admin_login', ['title' => 'Login Admin']);
     }
 
     public function adminLogin(Request $request)
@@ -125,7 +125,7 @@ class AuthController extends Controller
     }
     public function showPenggunaLoginForm()
     {
-        return view('auth.pengguna_login');
+        return view('auth.pengguna_login', ['title' => 'Login Pengguna']);
     }
     public function penggunaLogin(Request $request)
     {
@@ -153,7 +153,7 @@ class AuthController extends Controller
 
     public function showSupirLoginForm()
     {
-        return view('auth.supir_login');
+        return view('auth.supir_login', ['title' => 'Login Supir']);
     }
     public function supirLogin(Request $request)
     {
