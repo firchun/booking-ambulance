@@ -16,7 +16,8 @@ class PetiController extends Controller
     public function index()
     {
         //
-        return view('admin.peti.index');
+        $data = Peti::paginate(10);
+        return view('admin.peti.index', compact('data'));
     }
 
     /**
@@ -101,5 +102,14 @@ class PetiController extends Controller
     public function destroy(string $id)
     {
         //
+        try {
+            $peti = Peti::findOrFail($id);
+            $peti->delete();
+
+            Alert::success('Success', 'Peti telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
+            return response()->json(['success' => true]); // Ubah di sini
+        } catch(Exception $e) {
+            return response()->json(['success' => false]); // Ubah di sini
+        }
     }
 }

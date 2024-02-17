@@ -1,13 +1,5 @@
-@include('layout.navigation')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('layout.app')
+@section('content')
     <div class="container-fluid bg-light min-vh-100 p-4 d-flex flex-row">
         <div class="booked w-50 p-4">
             <h3>Pemesanan</h3>
@@ -57,21 +49,19 @@
                     <input type="hidden" name="id" id="" value="{{Auth::guard('supir')->user()->id}}">
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Nama</label>
-                        <input type="text" name="nama" id="" class="form-control" value="{{Auth::guard('supir')->user()->nama}}">
+                        <input type="text" name="nama" id="" class="form-control" value="{{Auth::guard('supir')->user()->nama}}" readonly>
                     </div>
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">No Telp</label>
-                        <input type="text" name="noHP" id="" class="form-control" value="{{Auth::guard('supir')->user()->noHP}}">
+                        <input type="text" name="noHP" id="" class="form-control" value="{{Auth::guard('supir')->user()->noHP}}" readonly>
                     </div>
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Alamat Penjemputan</label>
-                        <textarea name="alamat" id="" cols="30" rows="5" class="form-control">{{Auth::guard('supir')->user()->alamat}}</textarea>
+                        <textarea name="alamat" id="" cols="30" rows="5" class="form-control" readonly>{{Auth::guard('supir')->user()->alamat}}</textarea>
                     </div>
-                    <button class="btn btn-primary">Update Data Diri</button>
+                    {{-- <button class="btn btn-primary">Update Data Diri</button> --}}
                 </form>
             </div>
         </div>
     </div>
-</body>
-</html>
-@include('layout.footer')
+@endsection

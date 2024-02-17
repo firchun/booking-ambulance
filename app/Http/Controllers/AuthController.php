@@ -97,7 +97,7 @@ class AuthController extends Controller
 
     public function showAdminLoginForm()
     {
-        return view('auth.admin_login', ['title' => 'Login Admin']);
+        return view('auth.admin_login');
     }
 
     public function adminLogin(Request $request)
@@ -125,7 +125,7 @@ class AuthController extends Controller
     }
     public function showPenggunaLoginForm()
     {
-        return view('auth.pengguna_login', ['title' => 'Login Pengguna']);
+        return view('auth.pengguna_login');
     }
     public function penggunaLogin(Request $request)
     {
@@ -153,7 +153,7 @@ class AuthController extends Controller
 
     public function showSupirLoginForm()
     {
-        return view('auth.supir_login', ['title' => 'Login Supir']);
+        return view('auth.supir_login');
     }
     public function supirLogin(Request $request)
     {
@@ -179,16 +179,14 @@ class AuthController extends Controller
         return redirect()->back()->withInput();
     }
 
-    public function logout()
-    {
-        if (Auth::guard('pengguna')->check()) {
+    public function logout(){
+        if(Auth::guard('pengguna')->check()){
             Auth::guard('pengguna')->logout();
-        } elseif (Auth::guard('admin')->check()) {
+        }elseif(Auth::guard('admin')->check()){
             Auth::guard('admin')->logout();
-        } elseif (Auth::guard('supir')->check()) {
+        }elseif(Auth::guard('supir')->check()){
             Auth::guard('supir')->logout();
         }
-
-        return redirect()->route('welcome');
+        return Redirect::route('welcome');
     }
 }

@@ -1,15 +1,6 @@
-@include('layout.sidebar')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Pengguna</title>
-</head>
-<body>
-    <div class="container-fluid d-flex flex-column align-items-end p-0 bg-white min-vh-100 p-4">
-        @include('layout.header')
+@extends('layout.admin')
+
+@section('main-content')
         <hr>
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -69,12 +60,11 @@
                         <option value="ditolak" {{ $pengguna->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
                     </select>
                 </div>
-                <div class="d-flex gap-2">
+                <div class="buttons">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="{{route('pengguna.index')}}" class="btn btn-secondary">Kembali</a>
                 </div>
             </form>
         </div>
     </div>    
-</body>
-</html>
+    @endsection

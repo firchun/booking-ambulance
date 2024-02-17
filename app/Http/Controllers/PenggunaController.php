@@ -20,7 +20,8 @@ class PenggunaController extends Controller
     public function index()
     {
         //
-        return view('admin.pengguna.index');
+        $data = Pengguna::paginate(10);
+        return view('admin.pengguna.index', compact('data'));
     }
 
     /**
@@ -146,8 +147,17 @@ class PenggunaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         //
+        try {
+            $pengguna = Pengguna::findOrFail($id);
+            $pengguna->delete();
+
+            Alert::success('Success', 'Pengguna telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
+            return response()->json(['success' => true]); // Ubah di sini
+        } catch(Exception $e) {
+            return response()->json(['success' => false]); // Ubah di sini
+        }
     }
 }

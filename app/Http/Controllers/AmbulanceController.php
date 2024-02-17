@@ -14,8 +14,8 @@ class AmbulanceController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.ambulance.index');
+        $data = Ambulance::paginate(10);
+        return view('admin.ambulance.index', compact('data'));
     }
 
     /**
@@ -104,5 +104,15 @@ class AmbulanceController extends Controller
     public function destroy(string $id)
     {
         //
+        try {
+            $ambulance = Ambulance::findOrFail($id);
+            $ambulance->delete();
+
+            Alert::success('Success', 'Ambulance telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
+            return response()->json(['success' => true]); // Ubah di sini
+        } catch(Exception $e) {
+            return response()->json(['success' => false]); // Ubah di sini
+        }
     }
+    
 }

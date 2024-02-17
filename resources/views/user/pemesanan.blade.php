@@ -1,24 +1,16 @@
-@include('layout.navigation')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('layout.app')
+@section('content')
     <div class="container-fluid bg-light min-vh-100 p-4">
         <div class="card p-5">
             <h3>Pemesanan Ambulance</h3>
             <hr>
-            <div class="d-flex flex-row gap-4">
-                <form action="{{route('pemesanan.store')}}" method="post" class="form w-50">
+            <div class="row">
+                <form action="{{route('pemesanan.store')}}" method="post" class="form col-xl-6">
                     {{ csrf_field() }}
                     <input type="hidden" name="penggunaID" id="" value="{{Auth::guard('pengguna')->user()->id}}">
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Ambulance Tersedia</label>
-                        <select name="ambulanceID" id="" class="form-select">
+                        <select name="ambulanceID" id="" class="form-control">
                             @foreach ($ambulance as $item)
                                 <option value="{{$item->id}}">{{$item->merk}} | {{$item->noPolisi}}</option>
                             @endforeach
@@ -26,7 +18,7 @@
                     </div>
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Peti**</label>
-                        <select name="petiID" id="" class="form-select">
+                        <select name="petiID" id="" class="form-control">
                                 <option value="0">Tidak Menggunakan Peti</option>
                             @foreach ($peti as $item)
                                 <option value="{{$item->id}}">{{$item->jenis}}</option>
@@ -63,14 +55,12 @@
                     </div>
                     <button class="btn btn-primary">Submit</button>
                 </form>
-                <div class="w-50 py-4">
+                <div class="col-xl-6 py-4">
                     <div class="alert alert-info h-auto">
-                        A simple info alert—check it out!
+                        Data Wajib Diisi!
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
-@include('layout.footer')
+@endsection

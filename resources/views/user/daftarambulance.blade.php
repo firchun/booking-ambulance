@@ -1,13 +1,5 @@
-@include('layout.navigation')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('layout.app')
+@section('content')
     <div class="container-fluid bg-light min-vh-100 p-4 d-flex flex-row">
         <div class="booked w-100 p-4">
             <h3>Daftar Ambulance</h3>
@@ -45,6 +37,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
-@include('layout.footer')
+@endsection

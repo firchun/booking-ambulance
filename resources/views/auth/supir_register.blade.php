@@ -1,75 +1,78 @@
-@extends('layout.auth.app')
-@section('content')
-    <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-info">
-        <div class="py-4 my-4 d-flex flex-lg-row flex-column card flex-wrap align-items-center shadow-lg"
-            style="border-radius: 20px;">
-            <div class="flex-grow-1 w-sm-100 login-form py-4 ">
-                <div class="login-title d-flex flex-column gap-2 align-items-left">
-                    <strong>
-                        Booking Ambulance dengan cepat dan tepat
-                    </strong>
-                    <p class="text-secondary">Jadilah mitra driver kami sekarang!</p>
+@extends('layout.auth')
+
+@section('main-content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">{{ __('Register') }}</h1>
+                                </div>
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger border-left-danger" role="alert">
+                                        <ul class="pl-4 my-2">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                <div class="login-title d-flex flex-column gap-2 align-items-left">
+                                    <strong>
+                                        Booking Ambulance dengan cepat dan tepat
+                                    </strong>
+                                    <p class="text-secondary">Jadilah mitra driver kami sekarang!</p>
+                                </div>
+                                <form method="POST" action="{{ route('auth.supir_register') }}" class="user">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="nama" placeholder="{{ __('Nama') }}" value="{{ old('nama') }}" required autofocus>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="alamat" placeholder="{{ __('Alamat') }}" value="{{ old('alamat') }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="number" class="form-control form-control-user" name="noHP" placeholder="{{ __('No Hp') }}" value="{{ old('noHP') }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user" name="email" placeholder="{{ __('Email') }}" value="{{ old('email') }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user" name="password" placeholder="{{ __('Password') }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            {{ __('Register') }}
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <hr>
+
+                                <div class="text-center">
+                                    <p>Sudah punya akun? <a href="{{ route('auth.supir_form') }}" class="text-info">Masuk disini</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <form action="{{ route('auth.supir_register') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3 d-flex flex-column gap-2">
-                        <label for="nama" class="control-label fw-bold">Nama</label>
-                        <input type="text" name="nama" id="nama"
-                            class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}"
-                            placeholder="Nama">
-                        @error('nama')
-                            <small class="text-danger fw-bold">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-3 d-flex flex-column gap-2">
-                        <label for="alamat" class="control-label fw-bold">Alamat</label>
-                        <textarea name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" placeholder="Alamat">{{ old('alamat') }}</textarea>
-                        @error('alamat')
-                            <small class="text-danger fw-bold">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-3 d-flex flex-column gap-2">
-                        <label for="noHP" class="control-label fw-bold">No. HP</label>
-                        <input type="number" name="noHP" id="noHP"
-                            class="form-control @error('noHP') is-invalid @enderror" value="{{ old('noHP') }}"
-                            placeholder="No. HP">
-                        @error('noHP')
-                            <small class="text-danger fw-bold">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-3 d-flex flex-column gap-2">
-                        <label for="email" class="control-label fw-bold">Email</label>
-                        <input type="email" name="email" id="email"
-                            class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                            placeholder="Email">
-                        @error('email')
-                            <small class="text-danger fw-bold">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-3 d-flex flex-column gap-2">
-                        <label for="password" class="control-label fw-bold">Password</label>
-                        <input type="password" name="password" id="password"
-                            class="form-control @error('password') is-invalid @enderror" placeholder="Password">
-                        @error('password')
-                            <small class="text-danger fw-bold">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-3 d-flex flex-column gap-2">
-                        <label for="password_confirmation" class="control-label fw-bold">Konfirmasi Password</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation"
-                            class="form-control @error('password_confirmation') is-invalid @enderror"
-                            placeholder="Konfirmasi Password">
-                        @error('password_confirmation')
-                            <small class="text-danger fw-bold">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="d-flex flex-column gap-2">
-                        <button type="submit" class="btn btn-info btn-block mt-3 w-100">SignUp</button>
-                        <a href="{{ route('auth.supir_form') }}" type="submit"
-                            class="btn btn-outline-info btn-block w-100">Signin</a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
+</div>
 @endsection

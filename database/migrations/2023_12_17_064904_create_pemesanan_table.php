@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pengguna_id')->references('id')->on('pengguna');
-            $table->foreignId('ambulance_id')->references('id')->on('ambulance');
+            $table->foreignId('pengguna_id')->references('id')->on('pengguna')->onDelete('cascade');
+            $table->foreignId('ambulance_id')->references('id')->on('ambulance')->onDelete('cascade');
             $table->integer('peti_id')->nullable();
             $table->integer('supir_id')->nullable();
             $table->date('tanggal_penjemputan');

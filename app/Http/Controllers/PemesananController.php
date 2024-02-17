@@ -14,7 +14,8 @@ class PemesananController extends Controller
 {
     //
     public function index(){
-        return view('admin.pemesanan.index');
+        $data = Pemesanan::paginate(10);
+        return view('admin.pemesanan.index', compact('data'));
     }
     public function create(){
         $ambulance = Ambulance::get();

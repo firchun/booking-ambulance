@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Peti extends Model
 {
     use HasFactory;
-protected $table = 'peti';
+    protected $table = 'peti';
 }
