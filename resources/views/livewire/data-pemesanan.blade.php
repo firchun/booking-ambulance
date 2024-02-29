@@ -37,6 +37,7 @@
         <table class="table table-responsive table-bordered align-middle">
             <thead class="text-center">
                 <th>No</th>
+                <th>Resi</th>
                 <th>Ambulance</th>
                 <th>Penerima</th>
                 <th>Waktu Penjemputan</th>
@@ -52,6 +53,7 @@
                     <tr>
                         <input type="hidden" value="{{ $row->id }}">
                         <td class="text-center">{{ $i++ }}</td>
+                        <td>{{ $row->no_resi }}</td>
                         <td>
                             <p>{{ $row->merk }}</p>
                             <p>{{ $row->noPolisi }}</p>

@@ -10,30 +10,44 @@ use App\Models\Supir;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
+
 class PemesananController extends Controller
 {
     //
-    public function index(){
-        $data = Pemesanan::paginate(10);
+    public function index()
+    {
+        $data = Pemesanan::with(['pengguna', 'ambulance', 'peti'])->paginate(10);
         return view('admin.pemesanan.index', compact('data'));
     }
-    public function create(){
+    public function create()
+    {
         $ambulance = Ambulance::get();
         $peti = Peti::get();
-        return view('user.pemesanan',['ambulance'=>$ambulance,'peti'=>$peti]);
+        return view('user.pemesanan', ['ambulance' => $ambulance, 'peti' => $peti]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $message = [
-            'required'=>':attribute tidak boleh kosong'
+            'required' => ':attribute tidak boleh kosong'
         ];
         $this->validate($request, [
-            'waktuPenjemputan'=>'required',
-            'tanggalPenjemputan'=>'required',
-            'alamat'=>'required',
-            'tujuan'=>'required',
+            'waktuPenjemputan' => 'required',
+            'tanggalPenjemputan' => 'required',
+            'alamat' => 'required',
+            'tujuan' => 'required',
+            'panjang_peti' => 'required',
+            'lebar_peti' => 'required',
+            'upload_ktm' => ['nullable', 'file',  'mimes:jpg,jpeg,png,bmp,webp'],
+            'upload_kmd' => ['nullable', 'file',  'mimes:jpg,jpeg,png,bmp,webp'],
+            'upload_kk' => ['nullable', 'file',  'mimes:jpg,jpeg,png,bmp,webp'],
+            'upload_ktp' => ['nullable', 'file',  'mimes:jpg,jpeg,png,bmp,webp'],
         ], $message);
-        try{
+        try {
+            $milliseconds = round(microtime(true) * 1000);
+
+
             $data = new Pemesanan;
             $data->pengguna_id = $request->penggunaID;
             $data->ambulance_id = $request->ambulanceID;
@@ -42,42 +56,75 @@ class PemesananController extends Controller
             $data->waktu_penjemputan = $request->waktuPenjemputan;
             $data->lokasi_penjemputan = $request->alamat;
             $data->tujuan = $request->tujuan;
+            $data->panjang_peti = $request->panjang_peti;
+            $data->lebar_peti = $request->lebar_peti;
             $data->status = 'proses';
+            //resi
+            $data->no_resi = 'AMC' . $milliseconds;
+            //upload
+            if ($request->hasFile('upload_ktm')) {
+                $filename = Str::random(32) . '.' . $request->file('upload_ktm')->getClientOriginalExtension();
+                $file_path_ktm = $request->file('upload_ktm')->storeAs('public/berkas', $filename);
+                $data->upload_ktm = $file_path_ktm;
+            }
+
+            if ($request->hasFile('upload_kmd')) {
+                $filename = Str::random(32) . '.' . $request->file('upload_kmd')->getClientOriginalExtension();
+                $file_path_kmd = $request->file('upload_kmd')->storeAs('public/berkas', $filename);
+                $data->upload_kmd = $file_path_kmd;
+            }
+
+            if ($request->hasFile('upload_kk')) {
+                $filename = Str::random(32) . '.' . $request->file('upload_kk')->getClientOriginalExtension();
+                $file_path_kk = $request->file('upload_kk')->storeAs('public/berkas', $filename);
+                $data->upload_kk = $file_path_kk;
+            }
+
+            if ($request->hasFile('upload_ktp')) {
+                $filename = Str::random(32) . '.' . $request->file('upload_ktp')->getClientOriginalExtension();
+                $file_path_ktp = $request->file('upload_ktp')->storeAs('public/berkas', $filename);
+                $data->upload_ktp = $file_path_ktp;
+            }
+
+
+            //simpan
             $data->save();
 
-            if($request->petiID != 0){
-                $peti = Peti::where('id',$request->petiID)->first();
+            if ($request->petiID != 0) {
+                $peti = Peti::where('id', $request->petiID)->first();
                 $peti->stok = (int) $peti->stok - 1;
                 $peti->save();
             }
-            
+
             Alert::success('Success', 'Pemesanan Berhasil')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::route('pengguna.home');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Alert::error('Error', 'Gagal Membuat Pesanan')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::back()->withInput();
         }
     }
-    public function edit($id){
-        $supir = Supir::where('status','=','tersedia')->get();
-        return view('admin.pemesanan.edit',['supir'=>$supir,'id'=>$id]);
+    public function edit($id)
+    {
+        $supir = Supir::where('status', '=', 'tersedia')->get();
+        return view('admin.pemesanan.edit', ['supir' => $supir, 'id' => $id]);
     }
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $id = $request->id;
-        $pemesanan = Pemesanan::where('id',$id)->first();
+        $pemesanan = Pemesanan::where('id', $id)->first();
         $pemesanan->supir_id = $request->supir;
         $pemesanan->status = $request->status;
 
-        if($pemesanan->peti_id !=0){
-            $peti = Peti::where('id',$pemesanan->peti_id)->first();
+        if ($pemesanan->peti_id != 0) {
+            $peti = Peti::where('id', $pemesanan->peti_id)->first();
             $peti->stok = (int) $peti->stok - 1;
             $peti->save();
         }
 
-        $supir = Supir::Where('id',$pemesanan->supir_id)->first();
+        $supir = Supir::Where('id', $pemesanan->supir_id)->first();
         $supir->status = 'booked';
 
-        $ambulance = Ambulance::where('id',$pemesanan->ambulance_id)->first();
+        $ambulance = Ambulance::where('id', $pemesanan->ambulance_id)->first();
         $ambulance->status = 'full';
 
         $pemesanan->save();
@@ -87,16 +134,17 @@ class PemesananController extends Controller
         Alert::success('Data Berhasil Diupdate', 'Data Pesanan telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
         return Redirect::route('pemesanan.index');
     }
-    public function terima(Request $request){
+    public function terima(Request $request)
+    {
         $status = $request->status;
         $id = $request->id;
-        $pemesanan = Pemesanan::where('id',$id)->first();
-        $supir = Supir::where('id',$pemesanan->supir_id)->first();
-        $ambulance = Ambulance::where('id',$pemesanan->ambulance_id)->first();
-        if($status == 'diterima'){
+        $pemesanan = Pemesanan::where('id', $id)->first();
+        $supir = Supir::where('id', $pemesanan->supir_id)->first();
+        $ambulance = Ambulance::where('id', $pemesanan->ambulance_id)->first();
+        if ($status == 'diterima') {
             $pemesanan->status = 'menuju lokasi';
             $supir->status = 'full';
-        }elseif($status == 'menuju lokasi'){
+        } elseif ($status == 'menuju lokasi') {
             $pemesanan->status = 'selesai';
             $supir->status = 'tersedia';
             $ambulance->status = 'tersedia';
