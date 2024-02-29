@@ -54,20 +54,24 @@
                                 <ul>
                                     <li>
                                         <a class="{{ $row->upload_ktm == null ? 'text-danger' : '' }}"
-                                            href="{{ Storage::url($row->upload_ktm) }}" target="__blank"> Keterangan
+                                            href="{{ $row->upload_ktm == null ? '#' : Storage::url($row->upload_ktm) }}"
+                                            target="__blank"> Keterangan
                                             Tidak
                                             Mampu</a>
                                     </li>
                                     <li>
                                         <a class="{{ $row->upload_kmd == null ? 'text-danger' : '' }}"
-                                            href="{{ Storage::url($row->upload_kmd) }}" target="__blank"> Keterangan
+                                            href="{{ $row->upload_kmd == null ? '#' : Storage::url($row->upload_kmd) }}"
+                                            target="__blank"> Keterangan
                                             Meninggal Dunia</a>
                                     </li>
                                     <li><a class="{{ $row->upload_ktp == null ? 'text-danger' : '' }}"
-                                            href="{{ Storage::url($row->upload_ktp) }}" target="__blank"> Kartu Tanda
+                                            href="{{ $row->upload_ktp == null ? '#' : Storage::url($row->upload_ktp) }}"
+                                            target="__blank"> Kartu Tanda
                                             Penduduk</a></li>
                                     <li><a class="{{ $row->upload_kk == null ? 'text-danger' : '' }}"
-                                            href="{{ Storage::url($row->upload_kk) }}" target="__blank"> Kartu Keluarga</a>
+                                            href="{{ $row->upload_kk == null ? '#' : Storage::url($row->upload_kk) }}"
+                                            target="__blank"> Kartu Keluarga</a>
                                     </li>
                                 </ul>
                             </td>
