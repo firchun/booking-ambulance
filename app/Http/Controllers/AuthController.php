@@ -14,11 +14,45 @@ use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
+    public function showPembuatPetiRegisterForm()
+    {
+        return view('auth.pembuat_peti_register');
+    }
     public function showSupirRegisterForm()
     {
         return view('auth.supir_register');
     }
 
+    public function pembuatPetiRegister(Request $request)
+    {
+        $message = [
+            'required' => ':attribute tidak boleh kosong!',
+            'password.min' => 'Password harus berisi minimal 8 karakter',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'email.unique' => 'Email sudah dipakai',
+        ];
+
+        $this->validate($request, [
+            'nama' => 'required',
+            'email' => 'required|email|unique:supir,email',
+            'password' => 'required|min:8|confirmed',
+            'password_confirmation' => 'required',
+        ], $message);
+
+        try {
+            $supir = new Supir;
+            $supir->nama = $request->nama;
+            $supir->email = $request->email;
+            $supir->password = Hash::make($request->password);
+
+            $supir->save();
+
+            Alert::success('Registrasi Berhasil', 'Akun pembuat peti telah berhasil didaftarkan!')->showConfirmButton('Ok', '#0d6efd');
+            return Redirect::route('auth.pembuat_peti_form');
+        } catch (Exception $e) {
+            return Redirect::back()->withInput()->withErrors(['error' => 'Registrasi gagal. Silakan coba lagi.']);
+        }
+    }
     public function supirRegister(Request $request)
     {
         $message = [
@@ -95,11 +129,38 @@ class AuthController extends Controller
         }
     }
 
+    public function showPembuatPetiLoginForm()
+    {
+        return view('auth.pembuat_peti_login');
+    }
     public function showAdminLoginForm()
     {
         return view('auth.admin_login');
     }
 
+    public function pembuatPetiLogin(Request $request)
+    {
+        $message = [
+            'required' => ':attribute tidak boleh kosong!',
+        ];
+
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
+        ], $message);
+
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+
+        if (Auth::guard('pembuat_peti')->attempt($credentials)) {
+            return redirect()->route('pembuat_peti.home');
+        }
+
+        Alert::error('Login Gagal', 'Email atau Password Salah!')->showConfirmButton('Ok', '#0d6efd');
+        return redirect()->back()->withInput();
+    }
     public function adminLogin(Request $request)
     {
         $message = [
@@ -179,13 +240,16 @@ class AuthController extends Controller
         return redirect()->back()->withInput();
     }
 
-    public function logout(){
-        if(Auth::guard('pengguna')->check()){
+    public function logout()
+    {
+        if (Auth::guard('pengguna')->check()) {
             Auth::guard('pengguna')->logout();
-        }elseif(Auth::guard('admin')->check()){
+        } elseif (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
-        }elseif(Auth::guard('supir')->check()){
+        } elseif (Auth::guard('supir')->check()) {
             Auth::guard('supir')->logout();
+        } elseif (Auth::guard('pembuat_peti')->check()) {
+            Auth::guard('pembuat_peti')->logout();
         }
         return Redirect::route('welcome');
     }

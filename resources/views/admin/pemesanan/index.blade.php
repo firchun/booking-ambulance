@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered align-middle">
+            <table class="table table-bordered align-middle " id="myTable">
                 <thead class="text-center">
                     <th>No</th>
                     <th>Resi</th>

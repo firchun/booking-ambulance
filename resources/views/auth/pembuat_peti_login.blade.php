@@ -11,7 +11,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <a href="{{ url('/') }}" class="h3 fw-bold">Ambulance</a>
-                                        <h1 class="h4 text-gray-900 mb-4">{{ __('Login Supir') }}</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">{{ __('Login Pembuat Peti') }}</h1>
                                     </div>
 
                                     @if ($errors->any())
@@ -24,7 +24,7 @@
                                         </div>
                                     @endif
 
-                                    <form action="{{ route('auth.supir_login') }}" method="post" class="user">
+                                    <form action="{{ route('auth.pembuat_peti_login') }}" method="post" class="user">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group">
@@ -53,23 +53,17 @@
                                         </div>
 
 
-
                                     </form>
 
                                     <hr>
                                     <div class="text-center">
-                                        <p>Belum punya akun? <a href="{{ route('auth.supir_register_form') }}"
-                                                class="text-info">Daftar disini</a></p>
-                                    </div>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a href="{{ route('auth.pembuat_peti_form') }}"
-                                            class="btn btn-sm btn-success">Login
-                                            Pembuat Peti</a>
+
+                                        <a href="{{ route('auth.pengguna_form') }}" class="btn btn-sm btn-success">Login
+                                            User</a>
                                         <a href="{{ route('auth.admin_form') }}" class="btn btn-sm btn-secondary">Login
                                             Admin</a>
-                                        <a href="{{ route('auth.pengguna_form') }}" class="btn btn-sm btn-warning">Login
-                                            User</a>
+                                        <a href="{{ route('auth.supir_form') }}" class="btn btn-sm btn-warning">Login
+                                            Supir</a>
                                     </div>
                                 </div>
                             </div>

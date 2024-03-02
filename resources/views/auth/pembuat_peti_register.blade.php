@@ -1,4 +1,5 @@
-@extends('layout/auth')
+@extends('layout.auth')
+
 @section('main-content')
     <div class="container">
         <div class="row justify-content-center">
@@ -11,7 +12,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <a href="{{ url('/') }}" class="h3 fw-bold">Ambulance</a>
-                                        <h1 class="h4 text-gray-900 mb-4">{{ __('Login Supir') }}</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">{{ __('Register') }}</h1>
                                     </div>
 
                                     @if ($errors->any())
@@ -23,14 +24,33 @@
                                             </ul>
                                         </div>
                                     @endif
-
-                                    <form action="{{ route('auth.supir_login') }}" method="post" class="user">
+                                    <div class="login-title d-flex flex-column gap-2 align-items-left">
+                                        <strong>
+                                            Booking Ambulance dengan cepat dan tepat
+                                        </strong>
+                                        <p class="text-secondary">Bergabung dengan kami sekarang!</p>
+                                    </div>
+                                    <form method="POST" action="{{ route('auth.pembuat_peti_register') }}" class="user">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group">
+                                            <input type="text" class="form-control form-control-user" name="nama"
+                                                placeholder="{{ __('Nama') }}" value="{{ old('nama') }}" required
+                                                autofocus>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user" name="alamat"
+                                                placeholder="{{ __('Alamat') }}" value="{{ old('alamat') }}" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control form-control-user" name="noHP"
+                                                placeholder="{{ __('No Hp') }}" value="{{ old('noHP') }}" required>
+                                        </div>
+                                        <div class="form-group">
                                             <input type="email" class="form-control form-control-user" name="email"
-                                                placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}"
-                                                required autofocus>
+                                                placeholder="{{ __('Email') }}" value="{{ old('email') }}" required>
                                         </div>
 
                                         <div class="form-group">
@@ -39,37 +59,23 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" name="remember"
-                                                    id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                <label class="custom-control-label"
-                                                    for="remember">{{ __('Remember Me') }}</label>
-                                            </div>
+                                            <input type="password" class="form-control form-control-user"
+                                                name="password_confirmation" placeholder="{{ __('Confirm Password') }}"
+                                                required>
                                         </div>
+
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary btn-user btn-block">
-                                                {{ __('Login') }}
+                                                {{ __('Register') }}
                                             </button>
                                         </div>
-
-
-
                                     </form>
 
                                     <hr>
+
                                     <div class="text-center">
-                                        <p>Belum punya akun? <a href="{{ route('auth.supir_register_form') }}"
-                                                class="text-info">Daftar disini</a></p>
-                                    </div>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a href="{{ route('auth.pembuat_peti_form') }}"
-                                            class="btn btn-sm btn-success">Login
-                                            Pembuat Peti</a>
-                                        <a href="{{ route('auth.admin_form') }}" class="btn btn-sm btn-secondary">Login
-                                            Admin</a>
-                                        <a href="{{ route('auth.pengguna_form') }}" class="btn btn-sm btn-warning">Login
-                                            User</a>
+                                        <p>Sudah punya akun? <a href="{{ route('auth.pengguna_form') }}"
+                                                class="text-info">Masuk disini</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -79,5 +85,4 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
 @endsection

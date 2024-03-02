@@ -44,15 +44,19 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-    
+
         'pengguna' => [
             'driver' => 'session',
             'provider' => 'penggunas',
         ],
-    
+
         'supir' => [
             'driver' => 'session',
             'provider' => 'supirs',
+        ],
+        'pembuat_peti' => [
+            'driver' => 'session',
+            'provider' => 'pembuat_petis',
         ],
     ],
 
@@ -78,22 +82,26 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-    
+
         'penggunas' => [
             'driver' => 'eloquent',
             'model' => App\Models\Pengguna::class,
         ],
-    
+
         'supirs' => [
             'driver' => 'eloquent',
             'model' => App\Models\Supir::class,
         ],
-    
+        'pembuat_petis' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\PembuatPeti::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',

@@ -141,18 +141,38 @@ class PemesananController extends Controller
         $pemesanan = Pemesanan::where('id', $id)->first();
         $supir = Supir::where('id', $pemesanan->supir_id)->first();
         $ambulance = Ambulance::where('id', $pemesanan->ambulance_id)->first();
-        if ($status == 'diterima') {
-            $pemesanan->status = 'menuju lokasi';
-            $supir->status = 'full';
-        } elseif ($status == 'menuju lokasi') {
-            $pemesanan->status = 'selesai';
-            $supir->status = 'tersedia';
-            $ambulance->status = 'tersedia';
+        if ($pemesanan->peti_id == null) {
+
+            if ($status == 'diterima') {
+                $pemesanan->status = 'menuju lokasi';
+                $supir->status = 'full';
+            } elseif ($status == 'menuju lokasi') {
+                $pemesanan->status = 'selesai';
+                $supir->status = 'tersedia';
+                $ambulance->status = 'tersedia';
+            }
+        } else {
+            if ($status == 'diterima') {
+                $pemesanan->status = 'peti di proses';
+                $supir->status = 'tersedia';
+            } elseif ($status == 'peti di proses') {
+                $pemesanan->status = 'peti siap';
+                $supir->status = 'full';
+                $ambulance->status = 'full';
+            } elseif ($status == 'peti siap') {
+                $pemesanan->status = 'menuju lokasi';
+                $supir->status = 'full';
+                $ambulance->status = 'full';
+            } elseif ($status == 'menuju lokasi') {
+                $pemesanan->status = 'selesai';
+                $supir->status = 'tersedia';
+                $ambulance->status = 'tersedia';
+            }
         }
         $pemesanan->save();
         $supir->save();
         $ambulance->save();
         Alert::success('Status Berhasil Diupdate', 'Data Pesanan telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
-        return Redirect::route('supir.home');
+        return Redirect::back();
     }
 }
