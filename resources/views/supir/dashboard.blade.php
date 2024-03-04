@@ -11,13 +11,10 @@
                     </div>
                     <hr>
                     <div class="d-flex flex-column">
-                        <div class="fw-bold">
-                            Detail Pemesanan
-                        </div>
-                        <hr>
-                        <div>
-                            Nama Pemesanan {{ $pemesanan->nama }}
-                        </div>
+                        <b class="mb-2 h3">Detail Pemesanan</b>
+                        No Resi : <b class="text-primary">{{ $pemesanan->no_resi }}</b>
+
+                        Nama Pemesan {{ $pemesanan->nama }}
                         <div>No HP {{ $pemesanan->noHP }}</div>
                         <div>Alamat Pemesanan {{ $pemesanan->lokasi_penjemputan }}</div>
                         <div>Tujuan Pengantaran {{ $pemesanan->tujuan }}</div>
@@ -29,7 +26,7 @@
                         <input type="hidden" name="id" value="{{ $pemesanan->id }}">
                         <input type="hidden" name="status" value="{{ $pemesanan->status }}">
                         @if ($pemesanan->peti_id != null)
-                            @if ($pemesanan->status == 'peti di proses')
+                            @if ($pemesanan->status == 'peti di proses' || $pemesanan->status == 'diterima')
                                 <hr>
                                 <span class="text-danger">Menunggu Pembuatan Peti</span>
                             @elseif ($pemesanan->status == 'peti siap')
@@ -43,14 +40,15 @@
                             @elseif($pemesanan->status == 'menuju lokasi')
                                 <button class="btn btn-success">Selesaikan Pesanan</button>
                             @else
-                                <hr>
-                                <span class="text-danger">Menunggu Diterima oleh admin</span>
+                                <div class="alert alert-info d-flex justify-content-center fw-bold my-3">
+                                    Menunggu Persetujuan Admin
+                                </div>
                             @endif
                         @endif
                     </form>
                 @else
                     <div class="d-flex align-items-center justify-content-center">
-                        <div class="fs-4 fw-bold">Tidak Pesanan Yang Ditampilkan</div>
+                        <div class="fs-4 fw-bold">Tidak Ada Pesanan Yang Ditampilkan</div>
                     </div>
                 @endif
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ambulance;
+use App\Models\Pemesanan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -40,7 +41,7 @@ class PagesController extends Controller
             ->join('ambulance', 'ambulance.id', '=', 'pemesanan.ambulance_id')
             ->join('pengguna', 'pengguna.id', '=', 'pemesanan.pengguna_id')
             ->select('ambulance.merk', 'ambulance.noPolisi', 'pemesanan.*', 'pengguna.nama', 'pengguna.noHP')
-            ->where('pemesanan.supir_id', $id)
+            ->where('pemesanan.peti_id', '!=', null)
             ->where('pemesanan.status', '!=', 'selesai')
             ->first();
         return view('pembuat_peti.dashboard', ['pemesanan' => $pemesanan]);
@@ -49,5 +50,10 @@ class PagesController extends Controller
     {
         $ambulance = Ambulance::get();
         return view('user.daftarambulance', ['ambulance' => $ambulance]);
+    }
+    public function riwayat()
+    {
+        $riwayat = Pemesanan::where('pengguna_id', Auth::guard('pengguna')->user()->id)->get();
+        return view('user.riwayat', ['riwayat' => $riwayat]);
     }
 }

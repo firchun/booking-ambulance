@@ -3,21 +3,18 @@
     <div class="container-fluid bg-light min-vh-100 p-4 d-flex flex-row">
         <div class="booked w-50 p-4">
             <h3>Pemesanan Peti</h3>
-            <div class="card bg-light d-flex p-4 gap-2 justify-content-center h-50">
-                @if (isset($pemesanan) && $pemesanan->peti_id != null)
+            <div class="card bg-light d-flex p-4 gap-2 justify-content-center ">
+                @if (isset($pemesanan))
                     <div class="d-flex flex-column">
                         <div class="fw-bold fs-4">{{ $pemesanan->merk }}</div>
                         <div class="fw-bold fs-4">{{ $pemesanan->noPolisi }}</div>
                     </div>
                     <hr>
                     <div class="d-flex flex-column">
-                        <div class="fw-bold">
-                            Detail Pemesanan
-                        </div>
-                        <hr>
-                        <div>
-                            Nama Pemesanan {{ $pemesanan->nama }}
-                        </div>
+                        <b class="mb-2 h3">Detail Pemesanan</b>
+                        No Resi : <b class="text-primary">{{ $pemesanan->no_resi }}</b>
+
+                        Nama Pemesan {{ $pemesanan->nama }}
                         <div>No HP {{ $pemesanan->noHP }}</div>
                         <div>Alamat Pemesanan {{ $pemesanan->lokasi_penjemputan }}</div>
                         <div>Tujuan Pengantaran {{ $pemesanan->tujuan }}</div>
@@ -33,11 +30,19 @@
                             <button class="btn btn-primary">Peti di proses</button>
                         @elseif($pemesanan->status == 'peti di proses')
                             <button class="btn btn-success">Peti siap diantar</button>
+                        @elseif($pemesanan->status == 'proses')
+                            <div class="alert alert-info d-flex justify-content-center fw-bold my-3">
+                                Menunggu Persetujuan Admin
+                            </div>
+                        @elseif($pemesanan->status == 'menuju lokasi')
+                            <div class="alert alert-info d-flex justify-content-center fw-bold my-3">
+                                Peti telah selesai dan dalam pengantaran
+                            </div>
                         @endif
                     </form>
                 @else
                     <div class="d-flex align-items-center justify-content-center">
-                        <div class="fs-4 fw-bold">Tidak Pesanan Yang Ditampilkan</div>
+                        <div class="fs-4 fw-bold">Tidak ada Pesanan Yang Ditampilkan</div>
                     </div>
                 @endif
             </div>

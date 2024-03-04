@@ -52,6 +52,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-white" href="{{ route('page.ambulance') }}">Daftar Ambulance</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="{{ route('page.riwayat') }}">Riwayat
+                                        Pemesanan</a>
+                                </li>
                             @endif
                         @endguest
                     </ul>

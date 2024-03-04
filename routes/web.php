@@ -60,6 +60,7 @@ Route::middleware(['auth:pengguna'])->group(function () {
     Route::controller(PagesController::class)->group(function () {
         Route::get('user/dashboard', 'dashboard')->name('pengguna.home');
         Route::get('user/ambulance', 'ambulance')->name('page.ambulance');
+        Route::get('user/riwayat', 'riwayat')->name('page.riwayat');
     });
     Route::controller(PemesananController::class)->group(function () {
         Route::get('user/pemesanan', 'create')->name('pemesanan.create');

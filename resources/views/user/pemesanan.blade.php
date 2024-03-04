@@ -26,11 +26,11 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="row">
+                    <div class="row" id="ukuran">
                         <div class="col">
                             <div class="d-flex gap-2 flex-column mb-3">
                                 <label for="" class="control-label fw-bold">Panjang Peti</label>
-                                <input type="number" name="panjang_peti" id=""
+                                <input type="number" name="panjang_peti" value="0"
                                     class="form-control @error('panjang_peti') is-invalid @enderror" placeholder="Panjang">
                                 @error('panjang_peti')
                                     <small class="fw-bold text-danger">{{ $message }}</small>
@@ -40,7 +40,7 @@
                         <div class="col">
                             <div class="d-flex gap-2 flex-column mb-3">
                                 <label for="" class="control-label fw-bold">Lebar Peti</label>
-                                <input type="number" name="lebar_peti" id=""
+                                <input type="number" name="lebar_peti" value="0"
                                     class="form-control @error('lebar_peti') is-invalid @enderror" placeholder="Lebar">
                                 @error('lebar_peti')
                                     <small class="fw-bold text-danger">{{ $message }}</small>
@@ -52,7 +52,7 @@
                         <label for="" class="control-label fw-bold">Waktu Penjemputan</label>
                         <input type="time" name="waktuPenjemputan" id=""
                             class="form-control @error('waktuPenjemputan') is-invalid @enderror"
-                            placeholder="Waktu Penjemputan">
+                            placeholder="Waktu Penjemputan" required>
                         @error('waktuPenjemputan')
                             <small class="fw-bold text-danger">{{ $message }}</small>
                         @enderror
@@ -61,7 +61,7 @@
                         <label for="" class="control-label fw-bold">Tanggal Penjemputan</label>
                         <input type="date" name="tanggalPenjemputan" id=""
                             class="form-control @error('tanggalPenjemputan') is-invalid @enderror"
-                            placeholder="Tanggal Penjemputan">
+                            placeholder="Tanggal Penjemputan" required>
                         @error('tanggalPenjemputan')
                             <small class="fw-bold text-danger">{{ $message }}</small>
                         @enderror
@@ -69,7 +69,7 @@
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Alamat Penjemputan</label>
                         <textarea name="alamat" id="" cols="30" rows="5"
-                            class="form-control @error('alamat') is-invalid @enderror"></textarea>
+                            class="form-control @error('alamat') is-invalid @enderror" required></textarea>
                         @error('alamat')
                             <small class="fw-bold text-danger">{{ $message }}</small>
                         @enderror
@@ -77,7 +77,7 @@
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Tujuan</label>
                         <textarea name="tujuan" id="" cols="30" rows="5"
-                            class="form-control @error('tujuan') is-invalid @enderror"></textarea>
+                            class="form-control @error('tujuan') is-invalid @enderror" required></textarea>
                         @error('tujuan')
                             <small class="fw-bold text-danger">{{ $message }}</small>
                         @enderror
@@ -124,4 +124,22 @@
             </div>
         </div>
     </div>
+    <script script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#ukuran').hide();
+            $('select[name="petiID"]').change(function() {
+                var petiID = $(this).val();
+                if (petiID != 0) {
+                    $('input[name="panjang_peti"]').prop('required', true);
+                    $('input[name="lebar_peti"]').prop('required', true);
+                    $('#ukuran').show();
+                } else {
+                    $('#ukuran').hide();
+                    $('input[name="panjang_peti"]').prop('required', false);
+                    $('input[name="lebar_peti"]').prop('required', false);
+                }
+            });
+        });
+    </script>
 @endsection
