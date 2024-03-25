@@ -11,7 +11,7 @@
                         <h4>No Polisi : {{ $item->noPolisi }}</h4>
                         <p>Tujuan Pengantaran : {{ $item->tujuan }}</p>
                         <div class="alert alert-info d-flex justify-content-center fw-bold">
-                            Sedang {{ $item->status }}
+                            Pesanan {{ $item->status }}
                         </div>
                     @endforeach
                 @else
