@@ -22,12 +22,23 @@
     <!-- Styles -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <!-- Memuat CSS DataTable dari CDN -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js"></script>
+    <!-- Sertakan library DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- Sertakan library Buttons -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js"></script>
 
-    <!-- Memuat JavaScript DataTable dari CDN -->
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <!-- Favicon -->
-    <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
+
+</head>
+<!-- Favicon -->
+<link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
 </head>
 
 <body id="page-top">
@@ -212,11 +223,30 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable();
+            // Inisialisasi DataTables dengan tombol ekspor
+            let table = $('#myTable').DataTable({
+                buttons: ['excelHtml5']
+            });
+
+            // Fungsi untuk menghasilkan file PDF
+            $('#exportPDF').on('click', function() {
+                table.buttons('pdfHtml5').trigger();
+            });
+
+            // Fungsi untuk menghasilkan file Excel
+            $('#exportExcel').on('click', function() {
+                table.buttons('excelHtml5').trigger();
+            });
         });
     </script>
+
+
+
 </body>
 
 </html>

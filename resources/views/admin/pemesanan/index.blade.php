@@ -16,10 +16,14 @@
         <hr class="pb-4">
         <div class="form-action d-flex flex-row w-100 justify-content-between pb-4">
             <div class="buttons d-flex flex-row gap-2">
+                <!-- Tombol untuk ekspor ke PDF -->
+                <button id="exportPDF" class="btn btn-danger mr-3"><i class="fa fa-file-pdf"></i> Export to PDF</button>
+                <!-- Tombol untuk ekspor ke Excel -->
+                <button id="exportExcel" class="btn btn-success"><i class="fa fa-file-excel"></i> Export to Excel</button>
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered align-middle " id="myTable">
+            <table class="table table-bordered align-middle table-sm " id="myTable">
                 <thead class="text-center">
                     <th>No</th>
                     <th>Resi</th>
@@ -96,6 +100,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
     </div>
 @endsection
