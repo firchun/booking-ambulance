@@ -25,7 +25,7 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{ $pemesanan->id }}">
                         <input type="hidden" name="status" value="{{ $pemesanan->status }}">
-                        @if ($pemesanan->peti_id != null || $pemesanan->peti_id != 0)
+                        @if ($pemesanan->peti_id != null && $pemesanan->peti_id != 0)
                             @if ($pemesanan->status == 'peti di proses' || $pemesanan->status == 'diterima')
                                 <hr>
                                 <span class="text-danger">Menunggu Pembuatan Peti</span>
