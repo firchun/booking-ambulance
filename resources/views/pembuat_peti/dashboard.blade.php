@@ -26,7 +26,7 @@
                         <input type="hidden" name="id" value="{{ $pemesanan->id }}">
                         <input type="hidden" name="status" value="{{ $pemesanan->status }}">
 
-                        @if ($pemesanan->status == 'diterima')
+                        @if ($pemesanan->status == 'diterima' && $pemesanan->peti_id != 0)
                             <button class="btn btn-primary">Peti di proses</button>
                         @elseif($pemesanan->status == 'peti di proses')
                             <button class="btn btn-success">Peti siap diantar</button>
