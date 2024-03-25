@@ -25,7 +25,7 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{ $pemesanan->id }}">
                         <input type="hidden" name="status" value="{{ $pemesanan->status }}">
-                        @if ($pemesanan->peti_id == 0)
+                        @if ($pemesanan->peti_id == 0 && $pemesanan->panjang_peti == 0.0 && $pemesanan->lebar_peti == 0.0)
                             @if ($pemesanan->status == 'diterima')
                                 <button class="btn btn-primary">Terima Pesanan</button>
                             @elseif($pemesanan->status == 'menuju lokasi')
