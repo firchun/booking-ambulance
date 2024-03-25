@@ -1,10 +1,11 @@
 @extends('layout.app')
 @section('content')
-    <div class="container-fluid bg-light min-vh-100 p-4 d-flex flex-row">
+    <div class="container-fluid bg-light p-4 d-flex flex-row">
         <div class="booked w-50 p-4">
             <h3>Pemesanan Ambulance</h3>
             <div class="card bg-light d-flex p-4 gap-2 justify-content-center h-50">
-                @if (isset($pemesanan))
+                @if ($pemesanan)
+                    {{ dd($pemesanan) }}
                     <div class="d-flex flex-column">
                         <div class="fw-bold fs-4">{{ $pemesanan->merk }}</div>
                         <div class="fw-bold fs-4">{{ $pemesanan->noPolisi }}</div>
