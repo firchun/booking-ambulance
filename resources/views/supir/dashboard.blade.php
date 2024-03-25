@@ -25,16 +25,7 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{ $pemesanan->id }}">
                         <input type="hidden" name="status" value="{{ $pemesanan->status }}">
-                        @if ($pemesanan->peti_id != null && $pemesanan->peti_id != 0)
-                            @if ($pemesanan->status == 'peti di proses' || $pemesanan->status == 'diterima')
-                                <hr>
-                                <span class="text-danger">Menunggu Pembuatan Peti</span>
-                            @elseif ($pemesanan->status == 'peti siap')
-                                <button class="btn btn-primary">Menuju Lokasi</button>
-                            @elseif($pemesanan->status == 'menuju lokasi')
-                                <button class="btn btn-success">Selesaikan Pesanan</button>
-                            @endif
-                        @else
+                        @if ($pemesanan->peti_id == 0)
                             @if ($pemesanan->status == 'diterima')
                                 <button class="btn btn-primary">Terima Pesanan</button>
                             @elseif($pemesanan->status == 'menuju lokasi')
@@ -43,6 +34,15 @@
                                 <div class="alert alert-info d-flex justify-content-center fw-bold my-3">
                                     Menunggu Persetujuan Admin
                                 </div>
+                            @endif
+                        @else
+                            @if ($pemesanan->status == 'peti di proses' || $pemesanan->status == 'diterima')
+                                <hr>
+                                <span class="text-danger">Menunggu Pembuatan Peti</span>
+                            @elseif ($pemesanan->status == 'peti siap')
+                                <button class="btn btn-primary">Menuju Lokasi</button>
+                            @elseif($pemesanan->status == 'menuju lokasi')
+                                <button class="btn btn-success">Selesaikan Pesanan</button>
                             @endif
                         @endif
                     </form>
