@@ -3,7 +3,7 @@
     <div class="container-fluid bg-light p-4 d-flex flex-row">
         <div class="booked w-50 p-4">
             <h3>Pemesanan Ambulance</h3>
-            <div class="card bg-light d-flex p-4 gap-2 justify-content-center h-50">
+            <div class="card bg-light d-flex p-4 gap-2 justify-content-center ">
                 @if ($pemesanan)
                     {{-- {{ dd($pemesanan) }} --}}
                     <div class="d-flex flex-column">
