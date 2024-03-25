@@ -5,7 +5,7 @@
             <h3>Pemesanan Ambulance</h3>
             <div class="card bg-light d-flex p-4 gap-2 justify-content-center h-50">
                 @if ($pemesanan)
-                    {{ dd($pemesanan) }}
+                    {{-- {{ dd($pemesanan) }} --}}
                     <div class="d-flex flex-column">
                         <div class="fw-bold fs-4">{{ $pemesanan->merk }}</div>
                         <div class="fw-bold fs-4">{{ $pemesanan->noPolisi }}</div>

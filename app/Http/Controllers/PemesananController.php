@@ -141,7 +141,7 @@ class PemesananController extends Controller
         $pemesanan = Pemesanan::where('id', $id)->first();
         $supir = Supir::where('id', $pemesanan->supir_id)->first();
         $ambulance = Ambulance::where('id', $pemesanan->ambulance_id)->first();
-        if ($pemesanan->peti_id == null) {
+        if ($pemesanan->peti_id == 0) {
 
             if ($status == 'diterima') {
                 $pemesanan->status = 'menuju lokasi';
