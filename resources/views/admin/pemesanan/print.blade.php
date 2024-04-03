@@ -21,9 +21,10 @@
                 <td style="width: 20%">
                     <img style="width: 100px;" src="{{ public_path('img') }}/merauke.png">
                 </td>
-                <td class="text-center" style="width: 80%">DINAS SOSIAL KABUPATEN MERAUKE<br>
-                    Jl. Kamizaun Mopah Lama Merauke 99600 Telp/Fax (0971) 325923<br>
-                    E-mail: si@unmus.ac.id, Website: http://unmus.ac.id
+                <td class="text-center" style="width: 80%">PEMERINTAH KABUPATEN MERAUKE<br>
+                    <span style="font-size: 24px;">DINAS SOSIAL</span><br>
+                    Jl. R.E. Martadenata, Kab. Merauke Prov. Papua Selatan &nbsp;&nbsp;&nbsp;&nbsp;Website :
+                    sosial@merauke.go.id
                 </td>
                 <td style="width: 20%"></td>
             </tr>
