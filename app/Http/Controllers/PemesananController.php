@@ -183,6 +183,6 @@ class PemesananController extends Controller
             'pemesanan' => $data,
         ])->setPaper('a4', 'landscape')->setOption(['dpi' => 150]);
 
-        return $pdf->stream('Mahasiswa ' . '.pdf');
+        return $pdf->stream('Pemesanan ' . '.pdf');
     }
 }
