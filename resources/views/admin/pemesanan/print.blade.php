@@ -22,9 +22,9 @@
                     <img style="width: 100px;" src="{{ public_path('img') }}/merauke.png">
                 </td>
                 <td class="text-center" style="width: 80%">PEMERINTAH KABUPATEN MERAUKE<br>
-                    <span style="font-size: 24px;">DINAS SOSIAL</span><br>
-                    Jl. R.E. Martadenata, Kab. Merauke Prov. Papua Selatan &nbsp;&nbsp;&nbsp;&nbsp;Website :
-                    sosial@merauke.go.id
+                    <span style="font-size: 32px;">DINAS SOSIAL</span><br>
+                    <small> Jl. R.E. Martadenata, Kab. Merauke Prov. Papua Selatan &nbsp;&nbsp;&nbsp;&nbsp;Website :
+                        sosial@merauke.go.id</small>
                 </td>
                 <td style="width: 20%"></td>
             </tr>
