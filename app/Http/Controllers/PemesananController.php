@@ -17,7 +17,7 @@ class PemesananController extends Controller
     //
     public function index()
     {
-        $data = Pemesanan::with(['pengguna', 'ambulance', 'peti'])->paginate(10);
+        $data = Pemesanan::with(['pengguna', 'ambulance', 'peti'])->get();
         return view('admin.pemesanan.index', compact('data'));
     }
     public function create()
