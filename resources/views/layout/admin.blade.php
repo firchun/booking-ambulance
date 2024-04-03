@@ -226,24 +226,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Inisialisasi DataTables dengan tombol ekspor
-            let table = $('#myTable').DataTable({
-                buttons: ['excelHtml5']
-            });
 
-            // Fungsi untuk menghasilkan file PDF
-            $('#exportPDF').on('click', function() {
-                table.buttons('pdfHtml5').trigger();
-            });
-
-            // Fungsi untuk menghasilkan file Excel
-            $('#exportExcel').on('click', function() {
-                table.buttons('excelHtml5').trigger();
-            });
-        });
-    </script>
 
 
 

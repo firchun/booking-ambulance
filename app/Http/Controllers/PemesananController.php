@@ -175,4 +175,14 @@ class PemesananController extends Controller
         Alert::success('Status Berhasil Diupdate', 'Data Pesanan telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
         return Redirect::back();
     }
+    public function print(Request $request)
+    {
+        $data =  Pemesanan::with(['pengguna', 'ambulance', 'peti'])->get();
+        $pdf =  \PDF::loadView('admin.pemesanan.print', [
+            'title' => 'Laporan Pemesanan Ambulan',
+            'pemesanan' => $data,
+        ])->setPaper('a4', 'landscape')->setOption(['dpi' => 150]);
+
+        return $pdf->stream('Mahasiswa ' . '.pdf');
+    }
 }

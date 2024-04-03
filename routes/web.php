@@ -54,6 +54,7 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
         Route::get('/', 'index')->name('pemesanan.index');
         Route::get('/edit/{id}', 'edit')->name('pemesanan.edit');
         Route::post('/update', 'update')->name('pemesanan.update');
+        Route::get('/print', 'print')->name('pemesanan.print');
     });
 });
 Route::middleware(['auth:pengguna'])->group(function () {

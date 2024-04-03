@@ -18,14 +18,13 @@
             <div class="buttons d-flex flex-row gap-2">
                 <!-- Tombol untuk ekspor ke PDF -->
                 <button id="exportPDF" class="btn btn-danger mr-3"><i class="fa fa-file-pdf"></i> Export to PDF</button>
-                <!-- Tombol untuk ekspor ke Excel -->
-                <button id="exportExcel" class="btn btn-success"><i class="fa fa-file-excel"></i> Export to Excel</button>
             </div>
         </div>
         <div class="table-responsive">
             <table class="table table-bordered align-middle table-sm " id="myTable">
                 <thead class="text-center">
                     <th>No</th>
+                    <th>Tanggal</th>
                     <th>Resi</th>
                     <th>Ambulance</th>
                     <th>Penerima</th>
@@ -41,6 +40,7 @@
                         <tr>
                             <input type="hidden" value="{{ $row->id }}">
                             <td class="text-center">{{ $i++ }}</td>
+                            <td>{{ $row->created_at->format('d F Y') }}</td>
                             <td>{{ $row->no_resi }}</td>
                             <td>
                                 <b>Mobil : </b>{{ $row->ambulance->merk }} <br>
@@ -101,4 +101,14 @@
             </table>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            let table = $('#myTable').DataTable({});
+
+            $('#exportPDF').on('click', function() {
+                let url = '{{ route('pemesanan.print') }}';
+                window.open(url, '_blank');
+            })
+        });
+    </script>
 @endsection
