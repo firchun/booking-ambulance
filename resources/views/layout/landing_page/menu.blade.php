@@ -24,15 +24,18 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    @guest
-                        <a class="nav-link" href="{{ route('auth.pengguna_form') }}">Login</a>
+
+                    @if (auth()->guard('pembuat_peti')->check())
+                        <a class="nav-link" href="{{ route('pembuat_peti.home') }}">Dashboard</a>
+                    @elseif (auth()->guard('pengguna')->check())
+                        <a class="nav-link" href="{{ route('pengguna.home') }}">Dashboard</a>
+                    @elseif (auth()->guard('supir')->check())
+                        <a class="nav-link" href="{{ route('supir.home') }}">Dashboard</a>
+                    @elseif (auth()->guard('admin')->check())
+                        <a class="nav-link" href="{{ route('admin.home') }}">Dashboard</a>
                     @else
-                        <a class="nav-link text-danger" href="{{ route('auth.logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                        <form id="logout-form" action="{{ route('auth.logout') }}" method="GET" style="display: none;">
-                            @csrf
-                        </form>
-                    @endguest
+                        <a class="nav-link" href="{{ route('auth.pengguna_form') }}">Login</a>
+                    @endif
                 </li>
             </ul>
         </div>

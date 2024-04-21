@@ -49,7 +49,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fa fa-ambulance"></i>
                 </div>
@@ -78,6 +78,13 @@
                 <a class="nav-link" href="{{ route('pengguna.index') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>{{ __('Pengguna') }}</span>
+                </a>
+            </li>
+            <!-- Nav Item - Pengguna -->
+            <li class="nav-item {{ Nav::isRoute('berita.index') }}">
+                <a class="nav-link" href="{{ route('berita.index') }}">
+                    <i class="fas fa-fw fa-newspaper"></i>
+                    <span>{{ __('Berita') }}</span>
                 </a>
             </li>
 

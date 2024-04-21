@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Ambulance;
+
 class AmbulanceController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class AmbulanceController extends Controller
      */
     public function index()
     {
-        $data = Ambulance::paginate(10);
+        $data = Ambulance::all();
         return view('admin.ambulance.index', compact('data'));
     }
 
@@ -34,14 +35,14 @@ class AmbulanceController extends Controller
     {
         //
         $message = [
-            'required'=>':attribute tidak boleh kosong!',            
+            'required' => ':attribute tidak boleh kosong!',
         ];
-        $this->validate($request,[
-            'merk'=>'required',
-            'noPolisi'=>'required',
-            'noMesin'=>'required'
+        $this->validate($request, [
+            'merk' => 'required',
+            'noPolisi' => 'required',
+            'noMesin' => 'required'
         ], $message);
-        try{
+        try {
             $ambulance = new Ambulance;
             $ambulance->merk = $request->merk;
             $ambulance->noPolisi = $request->noPolisi;
@@ -50,7 +51,7 @@ class AmbulanceController extends Controller
             $ambulance->save();
             Alert::success('Success', 'Ambulance telah berhasil ditambahkan!')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::route('ambulance.index');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return Redirect::back()->withInput();
         }
     }
@@ -69,7 +70,7 @@ class AmbulanceController extends Controller
     public function edit(Ambulance $ambulance)
     {
         // 
-        return view('admin.ambulance.edit', ['ambulance'=>$ambulance]);
+        return view('admin.ambulance.edit', ['ambulance' => $ambulance]);
     }
 
     /**
@@ -79,21 +80,21 @@ class AmbulanceController extends Controller
     {
         //
         $message = [
-            'required'=>':attribute tidak boleh kosong!'
+            'required' => ':attribute tidak boleh kosong!'
         ];
         $this->validate($request, [
-            'merk'=>'required',
-            'noPolisi'=>'required',
-            'noMesin'=>'required'
+            'merk' => 'required',
+            'noPolisi' => 'required',
+            'noMesin' => 'required'
         ], $message);
-        try{
+        try {
             $ambulance->merk = $request->merk;
             $ambulance->noPolisi = $request->noPolisi;
             $ambulance->noMesin = $request->noMesin;
             $ambulance->save();
             Alert::success('Success', 'Ambulance telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::route('ambulance.index');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return Redirect::back()->withInput();
         }
     }
@@ -110,9 +111,8 @@ class AmbulanceController extends Controller
 
             Alert::success('Success', 'Ambulance telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
             return response()->json(['success' => true]); // Ubah di sini
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['success' => false]); // Ubah di sini
         }
     }
-    
 }

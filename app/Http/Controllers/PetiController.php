@@ -16,7 +16,7 @@ class PetiController extends Controller
     public function index()
     {
         //
-        $data = Peti::paginate(10);
+        $data = Peti::all();
         return view('admin.peti.index', compact('data'));
     }
 
@@ -36,20 +36,20 @@ class PetiController extends Controller
     {
         //
         $message = [
-            'required'=>':attribute tidak boleh kosong!'
+            'required' => ':attribute tidak boleh kosong!'
         ];
-        $this->validate($request,[
-            'jenis'=>'required',
-            'stok'=>'required'
-        ],$message);
-        try{
+        $this->validate($request, [
+            'jenis' => 'required',
+            'stok' => 'required'
+        ], $message);
+        try {
             $peti = new Peti;
             $peti->jenis = $request->jenis;
             $peti->stok = $request->stok;
             $peti->save();
             Alert::success('Success', 'Peti telah berhasil ditambahkan!')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::route('peti.index');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return Redirect::back()->withInput();
         }
     }
@@ -66,10 +66,9 @@ class PetiController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Peti $peti)
-    {   
+    {
         //  
-        return view('admin.peti.edit',['peti'=>$peti]);
-
+        return view('admin.peti.edit', ['peti' => $peti]);
     }
 
     /**
@@ -79,19 +78,19 @@ class PetiController extends Controller
     {
         //
         $message = [
-            'required'=>':attribute tidak boleh kosong!'
+            'required' => ':attribute tidak boleh kosong!'
         ];
-        $this->validate($request,[
-            'jenis'=>'required',
-            'stok'=>'required'
+        $this->validate($request, [
+            'jenis' => 'required',
+            'stok' => 'required'
         ], $message);
-        try{
+        try {
             $peti->jenis = $request->jenis;
             $peti->stok = $request->stok;
             $peti->save();
             Alert::success('Success', 'Peti telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::route('peti.index');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return Redirect::back()->withInput();
         }
     }
@@ -108,7 +107,7 @@ class PetiController extends Controller
 
             Alert::success('Success', 'Peti telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
             return response()->json(['success' => true]); // Ubah di sini
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['success' => false]); // Ubah di sini
         }
     }

@@ -20,7 +20,7 @@ class SupirController extends Controller
     public function index()
     {
         //
-        $data = Supir::paginate(10);
+        $data = Supir::all();
         return view('admin.supir.index', compact('data'));
     }
 
@@ -68,7 +68,7 @@ class SupirController extends Controller
             $supir->password = Hash::make($request->password);
 
             $supir->save();
-    
+
             Alert::success('Registrasi Berhasil', 'Akun Supir telah berhasil didaftarkan!')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::route('supir.index');
         } catch (Exception $e) {
@@ -96,7 +96,7 @@ class SupirController extends Controller
     public function edit(Supir $supir)
     {
         //
-        return view('admin.supir.edit', ['supir'=>$supir]);
+        return view('admin.supir.edit', ['supir' => $supir]);
     }
 
     /**
@@ -107,40 +107,40 @@ class SupirController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Supir $supir)
-{
-    //
-    $message = [
-        'required' => ':attribute tidak boleh kosong!',
-        'password.min' => 'Password harus berisi minimal 8 karakter',
-        'email' => 'required|email|unique:supir,email',
-    ];
+    {
+        //
+        $message = [
+            'required' => ':attribute tidak boleh kosong!',
+            'password.min' => 'Password harus berisi minimal 8 karakter',
+            'email' => 'required|email|unique:supir,email',
+        ];
 
-    $this->validate($request, [
-        'nama' => 'required',
-        'alamat' => 'required',
-        'noHP' => 'required',
-        'email' => 'required|email',
-        'password' => 'nullable|min:8',
-    ], $message);
+        $this->validate($request, [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'noHP' => 'required',
+            'email' => 'required|email',
+            'password' => 'nullable|min:8',
+        ], $message);
 
-    try {
-        $supir->nama = $request->nama;
-        $supir->alamat = $request->alamat;
-        $supir->noHP = $request->noHP;
-        $supir->email = $request->email;
+        try {
+            $supir->nama = $request->nama;
+            $supir->alamat = $request->alamat;
+            $supir->noHP = $request->noHP;
+            $supir->email = $request->email;
 
-        if ($request->password) {
-            $supir->password = Hash::make($request->password);
+            if ($request->password) {
+                $supir->password = Hash::make($request->password);
+            }
+
+            $supir->save();
+
+            Alert::success('Data Berhasil Diupdate', 'Data Supir telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
+            return Redirect::route('supir.index');
+        } catch (Exception $e) {
+            return Redirect::back()->withInput();
         }
-
-        $supir->save();
-
-        Alert::success('Data Berhasil Diupdate', 'Data Supir telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
-        return Redirect::route('supir.index');
-    } catch (Exception $e) {
-        return Redirect::back()->withInput();
     }
-}
 
     /**
      * Remove the specified resource from storage.
@@ -148,7 +148,7 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-        public function destroy(string $id)
+    public function destroy(string $id)
     {
         //
         try {
@@ -157,7 +157,7 @@ class SupirController extends Controller
 
             Alert::success('Success', 'Supir telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
             return response()->json(['success' => true]); // Ubah di sini
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['success' => false]); // Ubah di sini
         }
     }

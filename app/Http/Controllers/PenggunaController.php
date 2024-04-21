@@ -20,7 +20,7 @@ class PenggunaController extends Controller
     public function index()
     {
         //
-        $data = Pengguna::paginate(10);
+        $data = Pengguna::all();
         return view('admin.pengguna.index', compact('data'));
     }
 
@@ -65,9 +65,9 @@ class PenggunaController extends Controller
             $pengguna->noHP = $request->noHP;
             $pengguna->email = $request->email;
             $pengguna->password = Hash::make($request->password);
-            $pengguna->status = 'disetujui'; 
+            $pengguna->status = 'disetujui';
             $pengguna->save();
-    
+
             Alert::success('Registrasi Berhasil', 'Akun Pengguna telah berhasil didaftarkan!')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::route('pengguna.index');
         } catch (Exception $e) {
@@ -95,7 +95,7 @@ class PenggunaController extends Controller
     public function edit(Pengguna $pengguna)
     {
         //
-        return view('admin.pengguna.edit', ['pengguna'=>$pengguna]);
+        return view('admin.pengguna.edit', ['pengguna' => $pengguna]);
     }
 
     /**
@@ -106,40 +106,40 @@ class PenggunaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Pengguna $pengguna)
-{
-    //
-    $message = [
-        'required' => ':attribute tidak boleh kosong!',
-        'password.min' => 'Password harus berisi minimal 8 karakter',
-        'email' => 'required|email|unique:pengguna,email',
-    ];
+    {
+        //
+        $message = [
+            'required' => ':attribute tidak boleh kosong!',
+            'password.min' => 'Password harus berisi minimal 8 karakter',
+            'email' => 'required|email|unique:pengguna,email',
+        ];
 
-    $this->validate($request, [
-        'nama' => 'required',
-        'alamat' => 'required',
-        'noHP' => 'required',
-        'email' => 'required|email',
-        'password' => 'nullable|min:8',
-    ], $message);
+        $this->validate($request, [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'noHP' => 'required',
+            'email' => 'required|email',
+            'password' => 'nullable|min:8',
+        ], $message);
 
-    try {
-        $pengguna->nama = $request->nama;
-        $pengguna->alamat = $request->alamat;
-        $pengguna->noHP = $request->noHP;
-        $pengguna->email = $request->email;
-        $pengguna->status = $request->status; 
-        if ($request->password) {
-            $pengguna->password = Hash::make($request->password);
+        try {
+            $pengguna->nama = $request->nama;
+            $pengguna->alamat = $request->alamat;
+            $pengguna->noHP = $request->noHP;
+            $pengguna->email = $request->email;
+            $pengguna->status = $request->status;
+            if ($request->password) {
+                $pengguna->password = Hash::make($request->password);
+            }
+
+            $pengguna->save();
+
+            Alert::success('Data Berhasil Diupdate', 'Data Pengguna telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
+            return Redirect::route('pengguna.index');
+        } catch (Exception $e) {
+            return Redirect::back()->withInput();
         }
-
-        $pengguna->save();
-
-        Alert::success('Data Berhasil Diupdate', 'Data Pengguna telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
-        return Redirect::route('pengguna.index');
-    } catch (Exception $e) {
-        return Redirect::back()->withInput();
     }
-}
 
     /**
      * Remove the specified resource from storage.
@@ -156,7 +156,7 @@ class PenggunaController extends Controller
 
             Alert::success('Success', 'Pengguna telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
             return response()->json(['success' => true]); // Ubah di sini
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['success' => false]); // Ubah di sini
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ambulance;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
 use App\Models\Supir;
@@ -14,8 +15,18 @@ class HomeController extends Controller
     {
         $data = [
             'title' => 'Home',
+            'berita' => Berita::latest()->get(),
         ];
         return view('landing_page/index', $data);
+    }
+    public function baca_berita($slug)
+    {
+        $berita = Berita::where('slug', $slug)->first();
+        $data = [
+            'title' => $berita->judul_berita,
+            'berita' => $berita,
+        ];
+        return view('landing_page/baca_berita', $data);
     }
     public function struktur()
     {

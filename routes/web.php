@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\SupirController;
 use App\Http\Controllers\AmbulanceController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PetiController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PemesananController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\PemesananController;
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/struktur', [HomeController::class, 'struktur'])->name('struktur');
+Route::get('/baca_berita/{slug}', [HomeController::class, 'baca_berita'])->name('baca_berita');
 
 Route::controller(AuthController::class)->group(function () {
     //Route Login
@@ -47,6 +49,7 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
+    Route::resource('berita', BeritaController::class);
     Route::resource('pengguna', PenggunaController::class);
     Route::resource('supir', SupirController::class);
     Route::resource('ambulance', AmbulanceController::class);
