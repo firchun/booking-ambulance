@@ -6,7 +6,7 @@
         aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('ambulance.index') }}">Ambulance</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('berita.index') }}">Berita</a></li>
             <li class="breadcrumb-item active" aria-current="page">Tambah Berita</li>
         </ol>
     </nav>
