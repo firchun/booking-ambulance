@@ -22,6 +22,7 @@ use App\Http\Controllers\PemesananController;
 */
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
+Route::get('/struktur', [HomeController::class, 'struktur'])->name('struktur');
 
 Route::controller(AuthController::class)->group(function () {
     //Route Login

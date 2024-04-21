@@ -10,13 +10,25 @@ use App\Models\Supir;
 class HomeController extends Controller
 {
     //
-    public function welcome(){
-        return view('welcome');
+    public function welcome()
+    {
+        $data = [
+            'title' => 'Home',
+        ];
+        return view('landing_page/index', $data);
     }
-    
-    public function dashboard(){
+    public function struktur()
+    {
+        $data = [
+            'title' => 'Struktur',
+        ];
+        return view('landing_page/struktur', $data);
+    }
+
+    public function dashboard()
+    {
         $supir = Supir::get();
-        $ambulance = Ambulance::where('status','=','tersedia')->get();
-        return view('admin.home',['supir'=>$supir,'ambulance'=>$ambulance]);
+        $ambulance = Ambulance::where('status', '=', 'tersedia')->get();
+        return view('admin.home', ['supir' => $supir, 'ambulance' => $ambulance]);
     }
 }
