@@ -19,6 +19,14 @@ class HomeController extends Controller
         ];
         return view('landing_page/index', $data);
     }
+    public function panduan()
+    {
+        $data = [
+            'title' => 'Pemesanan mobil dan peti',
+            'file' => asset('file/panduan.pdf'),
+        ];
+        return view('landing_page/panduan', $data);
+    }
     public function baca_berita($slug)
     {
         $berita = Berita::where('slug', $slug)->first();

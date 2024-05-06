@@ -19,7 +19,8 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info Pelayanan</a>
 
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item @@blog" href="#">Pemesanan Mobil dan
+                        <li><a class="dropdown-item" href="{{ url('/panduan') }}">Pemesanan
+                                Mobil dan
                                 Peti</a></li>
                     </ul>
                 </li>

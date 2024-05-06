@@ -24,6 +24,7 @@ use App\Http\Controllers\PemesananController;
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/struktur', [HomeController::class, 'struktur'])->name('struktur');
+Route::get('/panduan', [HomeController::class, 'panduan'])->name('panduan');
 Route::get('/baca_berita/{slug}', [HomeController::class, 'baca_berita'])->name('baca_berita');
 
 Route::controller(AuthController::class)->group(function () {
