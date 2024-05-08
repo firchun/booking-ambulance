@@ -1,8 +1,8 @@
 @extends('layout.landing_page.app')
 @section('content')
     <!--=================================
-                                                                                                                                                                                                                                    =            Page Slider            =
-                                                                                                                                                                                                                                    ==================================-->
+                                                                                                                                                                                                                                                                            =            Page Slider            =
+                                                                                                                                                                                                                                                                            ==================================-->
     <div class="hero-slider">
         <!-- Slider Item -->
         <div class="slider-item slide1" style="background-image:url({{ asset('img/slider/1.jpg') }}">
@@ -12,10 +12,11 @@
                         <!-- Slide Content Start -->
                         <div class="content style text-center">
                             <h2 class="text-white text-bold mb-2" data-animation-in="slideInLeft">Dinas Sosial</h2>
-                            <p class="tag-text mb-4" data-animation-in="slideInRight">Dinas Sosial Kabupaten Merauke - Papua
-                                Selatan</p>
+                            <p class="tag-text mb-4" data-animation-in="slideInRight">memiliki layanan pemesanan Mobil dan
+                                Peti Jenazah secara GRATIS<br>
+                                Layanan tersebut dilakukan secara online Klik Pemesanan mobil dan peti jenazah dibawah</p>
                             <a href="{{ url('/login/user') }}" class="btn btn-main btn-white"
-                                data-animation-in="slideInLeft" data-duration-in="1.2">Login</a>
+                                data-animation-in="slideInLeft" data-duration-in="1.2">Pemesanan mobil dan peti jenazah</a>
                         </div>
                         <!-- Slide Content End -->
                     </div>
@@ -31,9 +32,10 @@
                         <div class="content style text-center">
                             <h2 class="text-white" data-animation-in="slideInRight">Dinas Sosial</h2>
                             <p class="tag-text mb-4" data-animation-in="slideInRight" data-duration-in="0.6">
-                                Dinas Sosial Kabupaten Merauke - Papua Selatan</p>
+                                memiliki layanan pemesanan Mobil dan Peti Jenazah secara GRATIS<br>
+                                Layanan tersebut dilakukan secara online Klik Pemesanan mobil dan peti jenazah dibawah</p>
                             <a href="{{ url('/login/user') }}" class="btn btn-main btn-white"
-                                data-animation-in="slideInRight" data-duration-in="1.2">Login</a>
+                                data-animation-in="slideInRight" data-duration-in="1.2">Pemesanan mobil dan peti jenazah</a>
                         </div>
                         <!-- Slide Content End-->
                     </div>
@@ -60,15 +62,10 @@
                             <h3>Sambutan Kepala Dinas Sosial Kabupaten Merauke</h3>
                         </div>
                         <div class="text">
-                            <p>The implant fixture is first placed, so that it ilikely to
-                                osseointegrate,
-                                then a dental prosthetic is added. then a
-                                dental prosthetic is added.then a dental pros- thetic is added.
-                            </p>
-                            <p>The implant fixture is first placed, so that it ilikely to
-                                osseointegrate,
-                                then a dental prosthetic is added. then a dental
-                                prosthetic is added.then a dental pros- thetic is added.</p>
+                            <p>Puji dan syukur patutlah dipersembahkan kepada Tuhan Yang Maha Kuasa, karena hanya oleh
+                                penyertaan-Nya maka kami Dinas Sosial Kabupaten Merauke dapat menyiapkan dan menyajikan
+                                Website Dinas Sosial Kabupaten Merauke untuk dapat menunjang pelayanan yang lebih
+                                efisien dan lebih baik.</p>
                         </div>
 
                         {{-- <a href="services.html" class="btn btn-style-one">Read more</a> --}}
