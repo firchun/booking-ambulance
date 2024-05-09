@@ -9,6 +9,7 @@ class Pemesanan extends Model
 {
     use HasFactory;
     protected $table = 'pemesanan';
+    protected $guarded = [];
     public function pengguna()
     {
         return $this->belongsTo(Pengguna::class, 'pengguna_id');

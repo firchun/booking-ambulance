@@ -147,6 +147,11 @@ class PemesananController extends Controller
                 $pemesanan->status = 'menuju lokasi';
                 $supir->status = 'full';
             } elseif ($status == 'menuju lokasi') {
+                if ($request->hasFile('foto_penerimaan')) {
+                    $filename = Str::random(32) . '.' . $request->file('foto_penerimaan')->getClientOriginalExtension();
+                    $file_path_foto = $request->file('foto_penerimaan')->storeAs('public/berkas', $filename);
+                    $pemesanan->foto_penerimaan = $file_path_foto;
+                }
                 $pemesanan->status = 'selesai';
                 $supir->status = 'tersedia';
                 $ambulance->status = 'tersedia';
@@ -164,6 +169,11 @@ class PemesananController extends Controller
                 $supir->status = 'full';
                 $ambulance->status = 'full';
             } elseif ($status == 'menuju lokasi') {
+                if ($request->hasFile('foto_penerimaan')) {
+                    $filename = Str::random(32) . '.' . $request->file('foto_penerimaan')->getClientOriginalExtension();
+                    $file_path_foto = $request->file('foto_penerimaan')->storeAs('public/berkas', $filename);
+                    $pemesanan->foto_penerimaan = $file_path_foto;
+                }
                 $pemesanan->status = 'selesai';
                 $supir->status = 'tersedia';
                 $ambulance->status = 'tersedia';

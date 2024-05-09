@@ -23,7 +23,7 @@ class HomeController extends Controller
     {
         $data = [
             'title' => 'Pemesanan mobil dan peti',
-            'file' => asset('file/panduan.pdf'),
+            'file' => asset('file/panduan-new.pdf'),
         ];
         return view('landing_page/panduan', $data);
     }

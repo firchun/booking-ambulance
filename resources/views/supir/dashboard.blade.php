@@ -22,7 +22,7 @@
                         <div>Tanggal Penjemputan {{ $pemesanan->tanggal_penjemputan }}</div>
                         <div>Waktu Penjemputan {{ $pemesanan->waktu_penjemputan }}</div>
                     </div>
-                    <form action="{{ route('pemesanan.terima') }}" method="post">
+                    <form action="{{ route('pemesanan.terima') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{ $pemesanan->id }}">
                         <input type="hidden" name="status" value="{{ $pemesanan->status }}">
@@ -30,6 +30,11 @@
                             @if ($pemesanan->status == 'diterima')
                                 <button class="btn btn-primary">Terima Pesanan</button>
                             @elseif($pemesanan->status == 'menuju lokasi')
+                                <hr>
+                                <div class="my-3">
+                                    <label>Foto bukti penerimaan</label>
+                                    <input type="file" name="foto_penerimaan" class="form-control" required>
+                                </div>
                                 <button class="btn btn-success">Selesaikan Pesanan</button>
                             @else
                                 <div class="alert alert-info d-flex justify-content-center fw-bold my-3">
@@ -43,6 +48,11 @@
                             @elseif ($pemesanan->status == 'peti siap')
                                 <button class="btn btn-primary">Menuju Lokasi</button>
                             @elseif($pemesanan->status == 'menuju lokasi')
+                                <hr>
+                                <div class="my-3">
+                                    <label>Foto bukti penerimaan</label>
+                                    <input type="file" name="foto_penerimaan" class="form-control" required>
+                                </div>
                                 <button class="btn btn-success">Selesaikan Pesanan</button>
                             @endif
                         @endif

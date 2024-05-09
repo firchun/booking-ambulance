@@ -39,7 +39,7 @@ class BeritaController extends Controller
         $this->validate($request, [
             'judul_berita' => 'required',
             'isi_berita' => 'required',
-            'foto_berita' => 'file|mimes:jpeg,png,jpg,gif,webp'
+            'foto_berita' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp'
         ], $message);
         try {
             $berita = new Berita;
@@ -49,7 +49,7 @@ class BeritaController extends Controller
             if ($request->hasFile('foto_berita')) {
                 $filename = Str::random(32) . '.' . $request->file('foto_berita')->getClientOriginalExtension();
                 $file_path_foto = $request->file('foto_berita')->storeAs('public/berkas', $filename);
-                $berita->upload_ktm = $file_path_foto;
+                $berita->foto_berita = $file_path_foto;
             }
             $berita->save();
             Alert::success('Success', 'berita telah berhasil ditambahkan!')->showConfirmButton('Ok', '#0d6efd');

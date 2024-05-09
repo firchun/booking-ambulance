@@ -85,6 +85,10 @@
                                     class="badge @if ($row->status == 'proses') bg-warning @elseif($row->status == 'diterima' || $row->status == 'menuju lokasi') bg-info @elseif($row->status == 'selesai') bg-success @endif">
                                     {{ $row->status }}
                                 </div>
+                                @if ($row->status == 'selesai' && $row->foto_penerimaan != null)
+                                    <a target="__blank" href="{{ Storage::url($row->foto_penerimaan) }}"
+                                        class="btn btn-sm btn-primary mt-2">Lihat Bukti</a>
+                                @endif
                             </td>
                             <td class="text-center">
                                 <div class="buttons">
