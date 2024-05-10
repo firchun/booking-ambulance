@@ -107,7 +107,7 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, Pengguna $pengguna)
     {
-        //
+        // dd($request);
         $message = [
             'required' => ':attribute tidak boleh kosong!',
             'password.min' => 'Password harus berisi minimal 8 karakter',
@@ -118,7 +118,7 @@ class PenggunaController extends Controller
             'nama' => 'required',
             'alamat' => 'required',
             'noHP' => 'required',
-            'email' => 'required|email',
+            'email' => 'nullable|email',
             'password' => 'nullable|min:8',
         ], $message);
 
@@ -128,15 +128,16 @@ class PenggunaController extends Controller
             $pengguna->noHP = $request->noHP;
             $pengguna->email = $request->email;
             $pengguna->status = $request->status;
-            if ($request->password) {
+            if ($request->filled('password')) {
                 $pengguna->password = Hash::make($request->password);
             }
 
             $pengguna->save();
 
             Alert::success('Data Berhasil Diupdate', 'Data Pengguna telah berhasil diupdate!')->showConfirmButton('Ok', '#0d6efd');
-            return Redirect::route('pengguna.index');
+            return Redirect::back();
         } catch (Exception $e) {
+            Alert::success('Data Gagal Diupdate', 'Data Pengguna tgagal diupdate!')->showConfirmButton('Ok', '#0d6efd');
             return Redirect::back()->withInput();
         }
     }

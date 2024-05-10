@@ -49,11 +49,12 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('admin/dashboard', 'dashboard')->name('admin.home')->middleware(['auth:admin']);
 });
 
+
 Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
     Route::resource('berita', BeritaController::class);
-    Route::resource('pengguna', PenggunaController::class);
     Route::resource('supir', SupirController::class);
     Route::resource('ambulance', AmbulanceController::class);
+    Route::resource('pengguna', PenggunaController::class);
     Route::resource('peti', PetiController::class);
     Route::controller(PemesananController::class)->prefix('pemesanan')->group(function () {
         Route::get('/', 'index')->name('pemesanan.index');
@@ -67,6 +68,7 @@ Route::middleware(['auth:pengguna'])->group(function () {
         Route::get('user/dashboard', 'dashboard')->name('pengguna.home');
         Route::get('user/ambulance', 'ambulance')->name('page.ambulance');
         Route::get('user/riwayat', 'riwayat')->name('page.riwayat');
+        Route::put('user/update/{id}', 'updatePengguna')->name('page.update');
     });
     Route::controller(PemesananController::class)->group(function () {
         Route::get('user/pemesanan', 'create')->name('pemesanan.create');

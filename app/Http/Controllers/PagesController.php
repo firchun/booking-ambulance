@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ambulance;
 use App\Models\Pemesanan;
+use App\Models\Pengguna;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
+use Exception;
+use Illuminate\Support\Facades\Hash;
 
 class PagesController extends Controller
 {
@@ -55,5 +60,48 @@ class PagesController extends Controller
     {
         $riwayat = Pemesanan::where('pengguna_id', Auth::guard('pengguna')->user()->id)->get();
         return view('user.riwayat', ['riwayat' => $riwayat]);
+    }
+    public function updatePengguna(Request $request, $id)
+    {
+        // dd($request);
+        $message = [
+            'required' => ':attribute tidak boleh kosong!',
+            'password.min' => 'Password harus berisi minimal 8 karakter',
+            'email' => 'required|email|unique:pengguna,email',
+        ];
+
+        $this->validate($request, [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'noHP' => 'required',
+            'email' => 'nullable|email',
+            'password' => 'nullable|min:8',
+        ], $message);
+
+        try {
+            $pengguna = Pengguna::find($id);
+            $pengguna->nama = $request->nama;
+            $pengguna->alamat = $request->alamat;
+            $pengguna->noHP = $request->noHP;
+            $pengguna->email = $request->email;
+            $pengguna->status = $request->status ?? $pengguna->status;
+            if ($request->filled('password')) {
+                $pengguna->password = Hash::make($request->password);
+            }
+
+            $pengguna->save();
+
+            return redirect()->back()
+                ->with('alert', [
+                    'type' => 'success',
+                    'message' => 'Data berhasil diperbarui!'
+                ]);
+        } catch (Exception $e) {
+            return redirect()->back()->withInput()
+                ->with('alert', [
+                    'type' => 'success',
+                    'message' => 'Data berhasil diperbarui!'
+                ]);
+        }
     }
 }
