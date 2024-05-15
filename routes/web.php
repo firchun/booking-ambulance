@@ -72,6 +72,7 @@ Route::middleware(['auth:pengguna'])->group(function () {
     });
     Route::controller(PemesananController::class)->group(function () {
         Route::get('user/pemesanan', 'create')->name('pemesanan.create');
+        Route::delete('user/destroy/{id}', 'destroy')->name('pemesanan.destroy');
         Route::post('user/pemesanan/create', 'store')->name('pemesanan.store');
     });
 });

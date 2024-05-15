@@ -40,7 +40,13 @@
                             <td>{{ $row->noPolisi }}</td>
                             <td>{{ $row->merk }}</td>
                             <td>{{ $row->noMesin }}</td>
-                            <td>{{ $row->status }}</td>
+                            <td>{{ $row->status }}
+                                @if ($row->status == 'full')
+                                    <br>
+                                    <span
+                                        class="text-primary">{{ App\Models\Pemesanan::where('ambulance_id', $row->id)->latest()->first()->no_resi }}</span>
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <div class="buttons">
                                     <a href="{{ route('ambulance.edit', $row->id) }}" class="btn btn-warning btn-sm"><i

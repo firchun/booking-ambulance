@@ -1,25 +1,38 @@
 @extends('layout.app')
 @section('content')
     <div class="container">
-        @if (session('alert'))
+        {{-- @if (session('alert'))
             <div class="alert alert-{{ session('alert')['type'] }} alert-dismissible fade show" role="alert">
                 <strong>{{ ucfirst(session('alert')['type']) }}!</strong> {{ session('alert')['message'] }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        @endif
+        @endif --}}
     </div>
     <div class="container-fluid bg-light min-vh-100 p-4 row">
         <div class="booked col-xl-6 p-4">
             <h3>Pemesanan</h3>
-            <div class="card bg-light d-flex p-4 gap-4 justify-content-center h-50">
+            <div class="card bg-light d-flex p-4 gap-4 justify-content-center ">
                 @if (count($pemesanan) > 0)
                     @foreach ($pemesanan as $item)
                         <h4>No. Resi : <b class="text-primary">{{ $item->no_resi }}</b></h4>
                         <h4>Ambulance : {{ $item->merk }}</h4>
                         <h4>No Polisi : {{ $item->noPolisi }}</h4>
                         <p>Tujuan Pengantaran : {{ $item->tujuan }}</p>
+                        @if ($item->peti_id != null || $item->peti_id != '')
+                            <hr>
+                            <p><strong>Informasi Peti :</strong></p>
+                            <p>Panjang : {{ $item->panjang_peti }} cm<br>Lebar : {{ $item->lebar_peti }} cm</p>
+                        @endif
+                        @if ($item->status == 'proses')
+                            <form action="{{ route('pemesanan.destroy', $item->id) }}" method="POST" id="deleteForm">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="confirmDelete()" class="btn btn-sm btn-danger mb-3">Batalkan
+                                    Pesanan</button>
+                            </form>
+                        @endif
                         <div class="alert alert-info d-flex justify-content-center fw-bold">
                             Pesanan {{ $item->status }}
                         </div>
@@ -80,5 +93,12 @@
         </div>
     </div>
     <!-- SweetAlert2 JS -->
+    <script>
+        function confirmDelete() {
+            if (confirm("Apakah Anda yakin ingin membatalkan pesanan?")) {
+                document.getElementById("deleteForm").submit();
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.all.min.js"></script>
 @endsection

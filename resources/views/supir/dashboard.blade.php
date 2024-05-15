@@ -15,12 +15,12 @@
                         <b class="mb-2 h3">Detail Pemesanan</b>
                         No Resi : <b class="text-primary">{{ $pemesanan->no_resi }}</b>
 
-                        Nama Pemesan {{ $pemesanan->nama }}
-                        <div>No HP {{ $pemesanan->noHP }}</div>
-                        <div>Alamat Pemesanan {{ $pemesanan->lokasi_penjemputan }}</div>
-                        <div>Tujuan Pengantaran {{ $pemesanan->tujuan }}</div>
-                        <div>Tanggal Penjemputan {{ $pemesanan->tanggal_penjemputan }}</div>
-                        <div>Waktu Penjemputan {{ $pemesanan->waktu_penjemputan }}</div>
+                        Nama Pemesan : {{ $pemesanan->nama }}
+                        <div>No HP : {{ $pemesanan->noHP }}</div>
+                        <div>Alamat Pemesanan : {{ $pemesanan->lokasi_penjemputan }}</div>
+                        <div>Tujuan Pengantaran : {{ $pemesanan->tujuan }}</div>
+                        <div>Tanggal Penjemputan : {{ $pemesanan->tanggal_penjemputan }}</div>
+                        <div>Waktu Penjemputan : {{ $pemesanan->waktu_penjemputan }}</div>
                     </div>
                     <form action="{{ route('pemesanan.terima') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}

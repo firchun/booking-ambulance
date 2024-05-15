@@ -195,4 +195,12 @@ class PemesananController extends Controller
 
         return $pdf->stream('Pemesanan ' . '.pdf');
     }
+    public function destroy($id)
+    {
+        $pemesanan = Pemesanan::find($id);
+        if ($pemesanan != null) {
+            $pemesanan->delete();
+        }
+        return Redirect::back();
+    }
 }

@@ -27,6 +27,7 @@
                     <th>Nama</th>
                     <th>Alamat</th>
                     <th>Email</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </thead>
                 <tbody>
@@ -38,6 +39,14 @@
                             <td>{{ $row->nama }}</td>
                             <td>{{ $row->alamat }}</td>
                             <td>{{ $row->email }}</td>
+                            <td>
+                                {{ $row->status }}
+                                @if ($row->status == 'booked')
+                                    <br>
+                                    <span
+                                        class="text-primary">{{ App\Models\Pemesanan::where('supir_id', $row->id)->latest()->first()->no_resi }}</span>
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <div class="buttons">
                                     <a href="{{ route('supir.edit', $row->id) }}" class="btn btn-warning btn-sm"><i
