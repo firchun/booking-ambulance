@@ -24,6 +24,7 @@
             <table class="table table-bordered align-middle table-sm " id="myTable">
                 <thead class="text-center">
                     <th>No</th>
+                    <th>WA</th>
                     <th>Tanggal</th>
                     <th>Resi</th>
                     <th>Ambulance</th>
@@ -40,6 +41,10 @@
                         <tr>
                             <input type="hidden" value="{{ $row->id }}">
                             <td class="text-center">{{ $i++ }}</td>
+                            <td class="text-center">
+                                <a href="https://wa.me/{{ $row->pengguna->noHP }}?text=Hai,%20{{ $row->nama }}.%20No%20pesanan%20:%20{{ $row->no_resi }}.%20Pengajuan%20telah%20diverifikasi,%20harap%20menunggu%20untuk%20proses%20penjemputan..%0A%0A%0A%0ALebih%20lengkap,%20silahkan%20login%20pada%20https://ambulance.mixdev.id/login"
+                                    class="btn btn-sm btn-success">Kirim Pesan WhatsApp</a>
+                            </td>
                             <td>{{ $row->created_at->format('d F Y') }}</td>
                             <td>{{ $row->no_resi }}</td>
                             <td>

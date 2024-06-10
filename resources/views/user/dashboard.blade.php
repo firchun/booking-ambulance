@@ -34,7 +34,7 @@
                             </form>
                         @endif
                         <div class="alert alert-info d-flex justify-content-center fw-bold">
-                            Pesanan {{ $item->status }}
+                            <span class="h3">Pesanan {{ $item->status }}</span>
                         </div>
                     @endforeach
                 @else

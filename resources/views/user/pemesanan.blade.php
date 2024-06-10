@@ -85,7 +85,7 @@
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Upload Surat Keterangan Tidak Mampu</label>
                         <input name="upload_ktm" id="" type="file"
-                            class="form-control @error('upload_ktm') is-invalid @enderror">
+                            class="form-control @error('upload_ktm') is-invalid @enderror" required>
                         @error('upload_ktm')
                             <small class="fw-bold text-danger">{{ $message }}</small>
                         @enderror
@@ -93,7 +93,7 @@
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Upload Surat Keterangan Meninggal Dunia</label>
                         <input name="upload_kmd" id="" type="file"
-                            class="form-control @error('upload_kmd') is-invalid @enderror">
+                            class="form-control @error('upload_kmd') is-invalid @enderror" required>
                         @error('upload_kmd')
                             <small class="fw-bold text-danger">{{ $message }}</small>
                         @enderror
@@ -101,7 +101,7 @@
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Upload Kartu Keluarga</label>
                         <input name="upload_kk" id="" type="file"
-                            class="form-control @error('upload_kk') is-invalid @enderror">
+                            class="form-control @error('upload_kk') is-invalid @enderror" required>
                         @error('upload_kk')
                             <small class="fw-bold text-danger">{{ $message }}</small>
                         @enderror
@@ -109,7 +109,7 @@
                     <div class="d-flex gap-2 flex-column mb-3">
                         <label for="" class="control-label fw-bold">Upload Kartu Tanda Penduduk (KTP)</label>
                         <input name="upload_ktp" id="" type="file"
-                            class="form-control @error('upload_ktp') is-invalid @enderror">
+                            class="form-control @error('upload_ktp') is-invalid @enderror" required>
                         @error('upload_ktp')
                             <small class="fw-bold text-danger">{{ $message }}</small>
                         @enderror
