@@ -37,6 +37,7 @@ class PagesController extends Controller
             ->where('pemesanan.supir_id', $id)
             ->where('pemesanan.status', '!=', 'selesai')
             ->first();
+        // dd($pemesanan);
         return view('supir.dashboard', ['pemesanan' => $pemesanan]);
     }
     public function dashboardPembuatPeti()

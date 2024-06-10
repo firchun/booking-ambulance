@@ -31,6 +31,8 @@
                                 <button class="btn btn-primary">Terima Pesanan</button>
                             @elseif($pemesanan->status == 'menuju lokasi')
                                 <hr>
+                                <a href="https://wa.me/{{ $pemesanan->noHP }}/?text=Hai,%20{{ $pemesanan->nama }}.%20No%20pesanan%20:%20{{ $pemesanan->no_resi }}.%20Ambulan%20menuju%20lokasi%20penjemputan,%20harap%20untuk%20menunggu..%0A%0A%0A%0ALebih%20lengkap,%20silahkan%20login%20pada%20https://ambulance.mixdev.id/login"
+                                    class="btn btn-success">Kirim Pesan WhatsApp</a>
                                 <div class="my-3">
                                     <label>Foto bukti penerimaan</label>
                                     <input type="file" name="foto_penerimaan" class="form-control" required>
@@ -49,7 +51,7 @@
                                 <button class="btn btn-primary">Menuju Lokasi</button>
                             @elseif($pemesanan->status == 'menuju lokasi')
                                 <hr>
-                                <a href="https://wa.me/{{ $pemesanan->pengguna->noHP }}/?text=Hai,%20{{ $pemesanan->nama }}.%20No%20pesanan%20:%20{{ $pemesanan->no_resi }}.%20Ambulan%20menuju%20lokasi%20penjemputan,%20harap%20untuk%20menunggu..%0A%0A%0A%0ALebih%20lengkap,%20silahkan%20login%20pada%20https://ambulance.mixdev.id/login"
+                                <a href="https://wa.me/{{ $pemesanan->noHP }}/?text=Hai,%20{{ $pemesanan->nama }}.%20No%20pesanan%20:%20{{ $pemesanan->no_resi }}.%20Ambulan%20menuju%20lokasi%20penjemputan,%20harap%20untuk%20menunggu..%0A%0A%0A%0ALebih%20lengkap,%20silahkan%20login%20pada%20https://ambulance.mixdev.id/login"
                                     class="btn btn-success">Kirim Pesan WhatsApp</a>
 
                                 <div class="my-3">
