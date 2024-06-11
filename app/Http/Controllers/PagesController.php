@@ -46,10 +46,12 @@ class PagesController extends Controller
         $pemesanan = DB::table('pemesanan')
             ->join('ambulance', 'ambulance.id', '=', 'pemesanan.ambulance_id')
             ->join('pengguna', 'pengguna.id', '=', 'pemesanan.pengguna_id')
-            ->select('ambulance.merk', 'ambulance.noPolisi', 'pemesanan.*', 'pengguna.nama', 'pengguna.noHP')
+            ->join('supir', 'supir.id', '=', 'pemesanan.supir_id')
+            ->select('ambulance.merk', 'ambulance.noPolisi', 'pemesanan.*', 'pengguna.nama', 'pengguna.noHP', 'supir.noHP')
             ->where('pemesanan.peti_id', '!=', null)
             ->where('pemesanan.status', '!=', 'selesai')
             ->first();
+        // dd($pemesanan);
         return view('pembuat_peti.dashboard', ['pemesanan' => $pemesanan]);
     }
     public function ambulance()
